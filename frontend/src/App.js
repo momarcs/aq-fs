@@ -55,7 +55,7 @@ function App() {
           {
             currentYearFootPrints?.map((footprint, index) => {
               if (index <= 4) {
-                return <CountryCarbonBar index={index + 1} carbon={footprint.carbon} countryName={footprint.countryName} />
+                return <CountryCarbonBar index={index + 1} {...footprint} />
               }
             })
           }
