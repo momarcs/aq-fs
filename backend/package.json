@@ -6,7 +6,7 @@
   "scripts": {
     "init": "node ./scripts/generateData.js",
     "start": "source .env && nodemon index --exec \"node -r @babel/register\"",
-    "test": "mocha --watch --watch-files **/*.js,tests/*.js --exit --require @babel/polyfill --require @babel/register tests/"
+    "test": "source .env && mocha --no-timeout --watch --watch-files **/*.js,tests/*.js --exit --require @babel/polyfill --require @babel/register tests/"
   },
   "author": "Satya van Heummen",
   "license": "MIT",
@@ -14,7 +14,8 @@
     "axios": "^1.7.2",
     "body-parser": "^1.19.2",
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "node-cache": "^5.1.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.24.7",
