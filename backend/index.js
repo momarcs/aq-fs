@@ -1,12 +1,18 @@
 import express from 'express'
 import bodyParser from 'body-parser'
+import cors from "cors"
 import footprintApi from './footprintApi'
 
 const app = express()
-
 app.use(bodyParser.json())
+app.use(cors("*"))
 
-app.get('/', async (req, res) => {    
+app.get('/footprints', async (req, res) => {
+  const data = await footprintApi.getCountriesWithData()
+  return res.status(200).json({ data })
+})
+
+app.get('/', async (req, res) => {
   const countries = await footprintApi.getCountries()
   const country = await footprintApi.getDataForCountry(229)
 
@@ -32,12 +38,11 @@ app.get('/', async (req, res) => {
             border: 1px solid #efefef;
             border-radius: 6px;
             padding: 2em;"
-          >${JSON.stringify(country?.slice(0, 5), null, 2)}</pre>
+          >${JSON.stringify(country, null, 2)}</pre>         
         </div>
       </div>
     </center>    
   `)
-
 
   console.log('showing first 5 countries:')
   console.log(countries.slice(0, 5))
@@ -45,6 +50,6 @@ app.get('/', async (req, res) => {
   console.log(country.slice(0, 5))
 })
 
-app.listen(5000,() => {     
+app.listen(5000, () => {
   console.log('app is listening on port 5000')
 })
